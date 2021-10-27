@@ -1,0 +1,18 @@
+This command will classify a picture as a dog breed or will scrape deviantart.com for 5 pictures and classify each as a dog breed.  The results will be returned in json format.
+Python webscrape.py [option] argument
+Options:
+	--class:
+	–c: classify the photo location in argument as a type of dog
+
+	--scrape:
+	-s: scrape deviantart.com for 5 photos with the argument subject
+Usage:
+
+    -classify an image on www.deviantart.com
+	python webscrape.py -c https://www.deviantart.com/snatti89/art/344-365-Path-of-Miranda-sunset-619653969
+
+	-classify a local image
+	python webscrape.py -c test1.jpg
+
+	-scrape 5 dog images from www.deviantart.com
+	python webscrape.py -s dog
