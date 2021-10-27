@@ -1,3 +1,8 @@
+TODO list:
+    1) The model return the same answer for all inputs, possibly problem saving and reconstructing the model correctly
+    2) There is no catching of Timeout errors, should fail gracefully
+    3) Building the model outputs to the screen, that should be captured for debug output
+
 This program will classify either an single image or scrape 5 images from www.deviantart.com
 Example:
 	python3 webscraper.py -s dog
