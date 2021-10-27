@@ -40,16 +40,18 @@ def classifyImages(imageurls):
     session = HTMLSession()
     # the dictionary that will contain the return values
     dictrv = {}
+
     # load the tensorflow model
-    #my_model = keras.models.load_model("test_model")
-    #my_model = tensorflow.saved_model.load("test_model")
-    my_model = keras.models.load_model("dog_model.h5")
+    try:
+        my_model = keras.models.load_model("dog_model.h5")
+    except (Exception) as e:
+        print(e)
+
 
     batch = []
 
     # process each of the images and create a batch array for the prediction
     for url in imageurls:
-        print("url",url)
 
         # Check if the input is a url
         if(validators.url(url)):
@@ -89,7 +91,6 @@ def classifyImages(imageurls):
 
     # change the batch to numpy so it can be used
     npbatch = np.asarray(batch)
-    print("batch size", npbatch.shape)
 
     # set up the batch
     # TODO: set this up as a real batch so you don't have to look through
@@ -105,9 +106,7 @@ def classifyImages(imageurls):
     # get the answer (and the dogname associated with that answer) for each entry and add them to the dictionary.
     for answer in answers:
         val, idx = max((val, idx) for (idx, val) in enumerate(answer))
-        print("val ", val, " idx ", idx)
         dognames=getDogNames()
-        print("dog type:", dognames[idx])
         dicturl = {}
         dicturl["file"] = imageurls[count]
         dicturl["classification"] = dognames[idx].split('-')[1]
@@ -133,7 +132,6 @@ def scrape(keyword):
 
     # create the query string based on the input keyword
     querystring = "{}?q={} photo".format(URL,keyword)
-    print(querystring)
     resp = session.get(querystring)
 
     # render the page to resolve any javascript
@@ -176,7 +174,6 @@ def classifysingle(url):
 # declare the main for this program
 if __name__ == '__main__':
     args = sys.argv[1:]
-    print(args)
 
     # check that there are arguments
     if len(args) == 0:
